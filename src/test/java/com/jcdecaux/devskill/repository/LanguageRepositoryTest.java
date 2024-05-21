@@ -26,14 +26,12 @@ public class LanguageRepositoryTest {
     public void shouldSaveAndFetchLanguage() {
         //GIVEN
         Language exceptedLanguage = FAKE_DATA.languages.getFirst().toBuilder().build();
-        System.out.println("shouldSaveAndFetchLanguage: "+exceptedLanguage.toString());
 
 
         //WHEN
         exceptedLanguage.setId(1L);
         repository.saveAndFlush(exceptedLanguage);
         var actualLanguage = repository.findById(exceptedLanguage.getId());
-        System.out.println("actualLanguage: "+repository.findAll());
 
         //THEN
         assertThat(actualLanguage,  is(Optional.of(exceptedLanguage)));
