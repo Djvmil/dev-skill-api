@@ -1,7 +1,6 @@
 package com.jcdecaux.devskill.api;
 
 import com.jcdecaux.devskill.dto.LanguageDto;
-import com.jcdecaux.devskill.exceptions.RequiredException;
 import com.jcdecaux.devskill.service.language.LanguageService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -33,10 +32,6 @@ public class LanguageRessource {
 
     @PostMapping
     public LanguageDto create(@Valid @RequestBody LanguageDto dto) {
-
-        if (dto.getName() == null || dto.getName().isBlank())
-            throw new RequiredException("Language name is required");
-
         return languageService.create(dto);
     }
 
