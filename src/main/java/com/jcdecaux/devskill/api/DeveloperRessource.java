@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/api/developers")
 public class DeveloperRessource {
 
-    @Autowired
-    private DeveloperService developerService;
+    private final DeveloperService developerService;
+
+    public DeveloperRessource(DeveloperService developerService){
+        this.developerService = developerService;
+    }
 
     @GetMapping
     public List<DeveloperDto> getAll() {

@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/api/languages")
 public class LanguageRessource {
 
-    @Autowired
-    private LanguageService languageService;
+    private final LanguageService languageService;
+
+    public LanguageRessource(LanguageService languageService){
+        this.languageService = languageService;
+    }
 
     @Autowired
     private ModelMapper modelMapper;
