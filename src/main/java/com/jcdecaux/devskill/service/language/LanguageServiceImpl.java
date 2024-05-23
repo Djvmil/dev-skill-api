@@ -8,7 +8,6 @@ import com.jcdecaux.devskill.exceptions.NotFoundException;
 import com.jcdecaux.devskill.repository.LanguageRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +17,14 @@ import java.util.List;
 @Service
 public class LanguageServiceImpl implements LanguageService {
 
-    @Autowired
-    private LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public LanguageServiceImpl(LanguageRepository languageRepository, ModelMapper modelMapper){
+        this.languageRepository = languageRepository;
+        this.modelMapper = modelMapper;
+    }
+
 
     @Override
     public LanguageDto getById(Long id) {

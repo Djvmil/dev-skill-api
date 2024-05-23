@@ -14,15 +14,6 @@ import java.util.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(RequiredException.class)
-	public final ResponseEntity<ApiError> requiredException(RequiredException ex) {
-
-		return new ResponseEntity<>(new ApiError(
-				HttpStatus.BAD_REQUEST,
-				ex.getLocalizedMessage(),
-				ex.getLocalizedMessage()
-		), HttpStatus.BAD_REQUEST);
-	}
 
 	@ExceptionHandler(DevSkillException.class)
 	public final ResponseEntity<ApiError> devSkillException(DevSkillException ex) {

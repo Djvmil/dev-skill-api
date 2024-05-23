@@ -10,7 +10,6 @@ import com.jcdecaux.devskill.exceptions.NotFoundException;
 import com.jcdecaux.devskill.repository.DeveloperRepository;
 import com.jcdecaux.devskill.repository.LanguageRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,14 +19,15 @@ import java.util.stream.Collectors;
 @Service
 public class DeveloperServiceImpl implements DeveloperService {
 
-    @Autowired
-    private DeveloperRepository developerRepository;
+    private final DeveloperRepository developerRepository;
+    private final LanguageRepository languageRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private LanguageRepository languageRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    public DeveloperServiceImpl(DeveloperRepository developerRepository, LanguageRepository languageRepository, ModelMapper modelMapper){
+        this.developerRepository = developerRepository;
+        this.languageRepository = languageRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public DeveloperDto getById(Long id) {

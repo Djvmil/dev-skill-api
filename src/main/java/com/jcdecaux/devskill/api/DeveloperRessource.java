@@ -2,7 +2,6 @@ package com.jcdecaux.devskill.api;
 
 import com.jcdecaux.devskill.dto.AddLanguageDto;
 import com.jcdecaux.devskill.dto.DeveloperDto;
-import com.jcdecaux.devskill.exceptions.RequiredException;
 import com.jcdecaux.devskill.service.developer.DeveloperService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -15,8 +14,11 @@ import java.util.List;
 @RequestMapping("/api/developers")
 public class DeveloperRessource {
 
-    @Autowired
-    private DeveloperService developerService;
+    private final DeveloperService developerService;
+
+    public DeveloperRessource(DeveloperService developerService){
+        this.developerService = developerService;
+    }
 
     @GetMapping
     public List<DeveloperDto> getAll() {
@@ -30,13 +32,6 @@ public class DeveloperRessource {
 
     @PostMapping
     public DeveloperDto create(@Valid @RequestBody DeveloperDto dto) {
-
-        if (dto.getName() == null || dto.getName().isBlank())
-            throw new RequiredException("Developer name is required");
-
-        if (dto.getEmail() == null || dto.getEmail().isBlank())
-            throw new RequiredException("Developer email is required");
-
         return developerService.create(dto);
     }
 
